@@ -1,0 +1,10 @@
+repositories:
+  isaac_ros_common:
+    type: git
+    url: git@github.com:jarkenau/isaac_ros_common.git
+    version: release-3.2
+
+  isaac_ros_nvblox:
+    type: git
+    url: git@github.com:jarkenau/isaac_ros_nvblox.git
+    version: main
