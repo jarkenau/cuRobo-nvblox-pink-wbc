@@ -2,6 +2,14 @@
 
 ## Setup
 
+### Hardware
+
+This setup has been used with the following hardware:
+
+- Jetson AGX Orin Developer Kit (64GB)
+- Intel RealSense D435
+- Kingston NV2 1TB M.2 2280 NVMe SSD
+
 ### Prerequisites
 
 1. **JetPack Installation**  
