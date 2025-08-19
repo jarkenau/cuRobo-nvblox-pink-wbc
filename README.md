@@ -1,8 +1,6 @@
 # cuRobo-nvblox-pink-wbc
 
-A demo integrating [nvblox](https://nvidia-isaac-ros.github.io/concepts/scene_reconstruction/nvblox/index.html) and [cuRobo](https://curobo.org/) for **dynamic collision avoidance** in servoing applications.
-
-## 🚀 Setup
+## Setup
 
 ### Prerequisites
 
@@ -11,9 +9,7 @@ A demo integrating [nvblox](https://nvidia-isaac-ros.github.io/concepts/scene_re
 
 2. **Storage Upgrade**  
    Install an [NVMe SSD](https://nvidia-isaac-ros.github.io/getting_started/hardware_setup/compute/jetson_storage.html).  
-   > The base storage is insufficient for NVIDIA’s Docker-based [developer environment](https://nvidia-isaac-ros.github.io/getting_started/dev_env_setup.html). The SSD will host the Docker directory.
-
----
+   The base storage is insufficient for NVIDIA’s Docker-based [developer environment](https://nvidia-isaac-ros.github.io/getting_started/dev_env_setup.html). The SSD will host the Docker directory.
 
 ### ROS Workspace Setup
 
@@ -45,13 +41,38 @@ A demo integrating [nvblox](https://nvidia-isaac-ros.github.io/concepts/scene_re
    source ~/.bashrc
    ```
 
-### 🛠 Development
+### Development
 
-- Start the environment:
+- To start the Docker-based development environment, run:
 
   ```bash
   isaacdev
   ```
 
-  This mounts your workspace into the container.  
-- Run `isaacdev` in another terminal to attach to the same container.
+  On the first run, this process may take over an hour because the Docker image will be built directly on the Jetson, with many dependencies from source.
+
+  **Tip:** Check the example sections below for any instructions about rebuilding the Docker image. If rebuilding is required, complete those steps *before* the initial build so you only build it once.
+
+  This command also mounts your workspace into the container.
+
+- In a separate terminal, run `isaacdev` again to attach to the same container.
+
+- **Important:** Dependencies installed inside a running container will only persist for that container’s lifetime. If you need them permenantly add them to the Dockerfile.
+
+## RealSense Example
+
+1. Set up the RealSense camera by following the [official setup guide](https://nvidia-isaac-ros.github.io/getting_started/hardware_setup/sensors/realsense_setup.html).  
+   **Note:** This step will trigger a partial Docker image rebuild, which may take some time.
+
+2. Build the ROS workspace:
+
+   ```bash
+   colcon build --symlink-install --packages-up-to nvblox_examples_bringup
+   source install/setup.bash
+   ```
+
+3. Run the example:
+
+   ```bash
+   ros2 launch nvblox_examples_bringup realsense_example.launch.py
+   ```
